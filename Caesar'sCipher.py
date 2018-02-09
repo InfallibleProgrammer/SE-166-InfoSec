@@ -7,14 +7,14 @@ ALPHABET = 26 #Number of letters in US English alphabet
 
 def FunctionSelect():
 	while 1 == 1:
-		mode = input("Enter 'E' for Encrypt and 'D' for Decrypt").lower()
+		mode = input("Enter 'E' for Encrypt and 'D' for Decrypt: ").lower()
 		if mode == "e" or mode == "d":
 			return mode
 		else:
-			print("Please enter a valid input")
+			print("Please enter a valid input! ")
 def Algorithm(mode):
-	message = input("Please enter the message/password you want encryped")
-	key = int(input("Enter a key value"))
+	message = input("Please enter the message/password you want encryped: ").lower()
+	key = int(input("Enter a key value: "))
 	key = key%ALPHABET
 	if mode == "d":
 		key = -key
