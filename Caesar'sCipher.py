@@ -1,53 +1,52 @@
 # This .py file was created to bring the concepts taught in class to life.
 # Concept: Caesar's Ciphere
-# By: Akash Vachhani
+# By: Akash Vachhani 
 # Date: 2/01/18
 
 import re
-
-ALPHABET = 26  # Number of letters in US English alphabet
-a = 97
-
-
-def FunctionSelect():
-    while 1 == 1:
-        mode = input("Enter 'E' for Encrypt and 'D' for Decrypt: ").lower()
-        if mode == "e" or mode == "d":
-            return mode
-        else:
-            print("Please enter a valid input! ")
-
 
 def CleanMessage(message):
     message = message.lower()
     message = re.sub("[^a-z\s]", "", message)
     return message
 
+def CaesarCipher(message, key, encrypt):
+    ALPHABET = 26 #Number of letters in US English alphabet
+    a = 97
 
-def CaesarCipher(message, mode):
-	ALPHABET = 26  # Number of letters in US English alphabet
-	a = 97 #ASCII value for letter a. 
     clean_msg = CleanMessage(message)
-    key = int(input("Enter a key value: "))
     key = key % ALPHABET
-    if mode == "d":
+    
+    if encrypt:
         key = -key
+    
     secret = ""
     for char in clean_msg:
         if char == " ":
             secret += char
         else:
-            # shift relationship
             newchar = chr(((((ord(char) - a) + key) % ALPHABET)) + a)
-            # get the ascii value, subtract a which is 97, than mod with ALPHABET than add 97
-            # to get new ASCII Value. Take chr of that value to get the letter.
+            #shift relationship
+            #get the ascii value, subtract a which is 97, than mod with ALPHABET than add 97
+            #to get new ASCII Value. Take chr of that value to get the letter.
             secret += newchar
     return secret
 
-mode = FunctionSelect()
 
-message = input("Please enter the message/password you want encrypted: ")
 
-secret = Algorithm(message, mode)
+encrypt = bool()
+while True:
+    mode = input("Enter 'E' for Encrypt or 'D' for Decrypt: ").lower()
+    if mode == 'e':
+        encrypt = True
+    elif mode == 'd':
+        encrypt = False
+    else:
+        continue
+    break
 
-print("Your translated message is: %s" % (secret))
+key = int(input("Enter a key value: "))
+message = input("Please enter the message/password you want encryped: ")
+secret = CaesarCipher(message, key, encrypt)
+
+print("Your translated message is: {}".format(secret))
