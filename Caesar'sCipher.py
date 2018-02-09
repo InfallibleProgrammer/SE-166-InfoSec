@@ -3,6 +3,8 @@
 # By: Akash Vachhani 
 # Date: 2/01/18
 
+import re
+
 ALPHABET = 26 #Number of letters in US English alphabet
 
 def FunctionSelect():
@@ -12,29 +14,27 @@ def FunctionSelect():
 			return mode
 		else:
 			print("Please enter a valid input! ")
-def Algorithm(mode):
-	message = input("Please enter the message/password you want encryped: ").lower()
+
+def CleanMessage(message):
+	message = message.lower()
+	message = re.sub("[^a-zA-z\s]","", message)
+	return message
+
+def Algorithm(message, mode):
+	clean_msg = CleanMessage(message)
 	key = int(input("Enter a key value: "))
-	key = key%ALPHABET
+	key = key % ALPHABET
 	if mode == "d":
 		key = -key
 	secret = ""
 	for char in message:
-		if char.islower():
-			secret += char
-		else:
-			newchar = ord(char)+key #ord gets ASCII value. Than adds the key value to it
-			if char.islower():
-				if newchar > ord('z'):
-					newchar -= 26 #Capitals come first in ASCII, so subtract 26 from it to wrap around
-				elif newchar > ord('a'):
-					newchar += 26 #Wrap around ASCII Value by adding 26 to it. 
-			elif char.isupper():
-				if newchar > ord('Z'):
-					newchar -= 26 #Capitals come first in ASCII, so subtract 26 from it to wrap around
-				elif newchar > ord('A'):
-					newchar += 26 #Wrap around ASCII Value by adding 26 to it. 
-			secret += chr(newchar)
-	print("Your translated message is: %s" %(secret))
+		# Write code here for shifting
+	return secret
+	
 mode = FunctionSelect()
-Algorithm(mode)
+
+message = input("Please enter the message/password you want encryped: ")
+
+secret = Algorithm(message, mode)
+
+print("Your translated message is: %s" %(secret))
