@@ -6,6 +6,7 @@
 import re
 
 ALPHABET = 26 #Number of letters in US English alphabet
+a = 97
 
 def FunctionSelect():
 	while 1 == 1:
@@ -27,8 +28,14 @@ def Algorithm(message, mode):
 	if mode == "d":
 		key = -key
 	secret = ""
-	for char in message:
-		# Write code here for shifting
+	for char in clean_msg:
+		if char == " ":
+			secret += " "
+		else:
+			newchar = chr(((((ord(char)-a)+key)%ALPHABET)) + a) #shift relationship
+			#get the ascii value, subtract a which is 97, than mod with ALPHABET than add 97
+			#to get new ASCII Value. Take chr of that value to get the letter.
+			secret += newchar
 	return secret
 	
 mode = FunctionSelect()
