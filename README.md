@@ -1,5 +1,5 @@
 # SE-166-InfoSec
-This github was made to bring the concepts learned in my Info Sec class to life
+ This github was made to bring the concepts learned in my Info Sec class to life
 
 ## Included Concepts
 * Caesar's Cipher
